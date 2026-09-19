@@ -1,35 +1,29 @@
-# SHOHFARM Telegram Bot
+# LUXURY
 
-Telegram-бот для заявок на перемещение товаров между филиалами SHOHFARM.
+### Premium Footwear — Telegram Mini App
 
-## Основные функции
-- выбор филиала-источника;
-- несколько товаров в одной заявке;
-- SQLite;
-- принятие заявки;
-- обязательный комментарий при отклонении;
-- уведомление инициатора;
-- `/myid`;
-- администратор: Telegram ID `6315295677`.
+LUXURY is a premium footwear shopping experience inside Telegram.
 
-## Запуск
+## Features
 
-Установить зависимости:
+- Premium footwear catalog
+- Product search
+- Categories and filters
+- Product photos
+- Size selection
+- Shopping cart
+- Checkout
+- Orders
+- Online payment
+- Delivery / pickup
+- BILLZ integration
+- Admin panel
 
-```bash
-pip install -r requirements.txt
-```
+## Project
 
-Задать переменные окружения:
+Telegram Mini App for the LUXURY footwear store.
 
-- `TELEGRAM_BOT_TOKEN`
-- `TRANSFER_CHANNEL_ID`
-- `ADMIN_ID`
+## Brand
 
-Запуск:
-
-```bash
-python bot.py
-```
-
-Не помещайте токен Telegram в GitHub.
+**LUXURY**  
+*THE ART OF WALKING*
