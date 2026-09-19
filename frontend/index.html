@@ -1,1 +1,1077 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>LUXURY — The Art of Walking</title>
 
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@500;600&display=swap');
+
+*{box-sizing:border-box}
+
+body{
+    margin:0;
+    background:#0b0b0b;
+    color:#f5f0e8;
+    font-family:Inter,Arial,sans-serif;
+    -webkit-tap-highlight-color:transparent;
+}
+
+button{font-family:inherit}
+
+.app{
+    max-width:600px;
+    margin:auto;
+    min-height:100vh;
+    padding-bottom:90px;
+}
+
+.header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:20px 18px 12px;
+}
+
+.logo{
+    font-family:"Playfair Display",serif;
+    font-size:27px;
+    letter-spacing:7px;
+}
+
+.subtitle{
+    font-size:8px;
+    letter-spacing:3px;
+    color:#c9aa72;
+    margin-top:2px;
+}
+
+.icon-btn{
+    width:40px;
+    height:40px;
+    border:1px solid #292929;
+    border-radius:50%;
+    background:#151515;
+    color:#eee;
+    font-size:18px;
+}
+
+.hero{
+    margin:8px 16px 25px;
+    min-height:390px;
+    border-radius:4px;
+    overflow:hidden;
+    position:relative;
+    background:
+      linear-gradient(180deg,transparent 35%,rgba(0,0,0,.9)),
+      url("https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=1000&q=85")
+      center/cover;
+}
+
+.hero-content{
+    position:absolute;
+    bottom:28px;
+    left:24px;
+}
+
+.hero-small{
+    color:#d8ba83;
+    font-size:10px;
+    letter-spacing:4px;
+}
+
+.hero h1{
+    font-family:"Playfair Display",serif;
+    font-size:40px;
+    font-weight:500;
+    margin:8px 0;
+}
+
+.hero p{
+    color:#cfc9c0;
+    font-size:12px;
+    margin-bottom:18px;
+}
+
+.gold-btn{
+    border:0;
+    background:#d8b778;
+    color:#111;
+    padding:14px 21px;
+    font-weight:600;
+    border-radius:2px;
+}
+
+.section{
+    padding:0 18px;
+    margin-top:28px;
+}
+
+.section-title{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:14px;
+}
+
+.section-title h2{
+    font-family:"Playfair Display",serif;
+    font-size:22px;
+    font-weight:500;
+    margin:0;
+}
+
+.section-title span{
+    color:#bda06d;
+    font-size:11px;
+}
+
+.categories{
+    display:flex;
+    gap:10px;
+    overflow-x:auto;
+    padding-bottom:5px;
+}
+
+.categories::-webkit-scrollbar{display:none}
+
+.cat{
+    min-width:92px;
+    height:72px;
+    border:1px solid #292929;
+    background:#131313;
+    color:#eee;
+    border-radius:3px;
+    padding:10px;
+    text-align:left;
+}
+
+.cat strong{
+    display:block;
+    font-size:11px;
+    margin-bottom:7px;
+}
+
+.cat span{
+    font-size:9px;
+    color:#8e8e8e;
+}
+
+.search{
+    margin:8px 18px 0;
+    display:none;
+}
+
+.search input{
+    width:100%;
+    background:#151515;
+    border:1px solid #292929;
+    color:white;
+    border-radius:4px;
+    padding:14px;
+    outline:none;
+}
+
+.products{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+}
+
+.product{
+    background:#121212;
+    border:1px solid #222;
+    border-radius:4px;
+    overflow:hidden;
+    position:relative;
+}
+
+.product-img{
+    width:100%;
+    aspect-ratio:1/1;
+    object-fit:cover;
+    display:block;
+}
+
+.heart{
+    position:absolute;
+    right:9px;
+    top:9px;
+    width:32px;
+    height:32px;
+    border:0;
+    border-radius:50%;
+    background:rgba(0,0,0,.6);
+    color:#fff;
+}
+
+.product-info{
+    padding:12px;
+}
+
+.product-brand{
+    color:#9b9b9b;
+    font-size:9px;
+    text-transform:uppercase;
+    letter-spacing:1px;
+}
+
+.product-name{
+    font-size:12px;
+    margin:5px 0;
+    line-height:1.3;
+}
+
+.price{
+    color:#e1c38b;
+    font-weight:600;
+    font-size:13px;
+}
+
+.old-price{
+    color:#777;
+    text-decoration:line-through;
+    font-size:10px;
+    margin-left:5px;
+}
+
+.page{
+    display:none;
+}
+
+.page.active{
+    display:block;
+}
+
+.catalog-header{
+    padding:20px 18px;
+}
+
+.catalog-header h1{
+    font-family:"Playfair Display",serif;
+    font-size:32px;
+    font-weight:500;
+    margin:0 0 15px;
+}
+
+.catalog-search{
+    width:100%;
+    background:#151515;
+    border:1px solid #292929;
+    color:#fff;
+    padding:14px;
+    border-radius:3px;
+    outline:none;
+}
+
+.filters{
+    display:flex;
+    gap:8px;
+    overflow-x:auto;
+    padding:0 18px 18px;
+}
+
+.filter{
+    white-space:nowrap;
+    padding:9px 14px;
+    background:#151515;
+    color:#aaa;
+    border:1px solid #292929;
+    border-radius:20px;
+    font-size:10px;
+}
+
+.filter.active{
+    background:#d8b778;
+    color:#111;
+    border-color:#d8b778;
+}
+
+.bottom{
+    position:fixed;
+    z-index:20;
+    bottom:0;
+    left:50%;
+    transform:translateX(-50%);
+    width:min(600px,100%);
+    height:70px;
+    background:rgba(12,12,12,.97);
+    border-top:1px solid #252525;
+    display:flex;
+    justify-content:space-around;
+    align-items:center;
+}
+
+.nav{
+    border:0;
+    background:none;
+    color:#777;
+    font-size:10px;
+}
+
+.nav.active{color:#e0c48b}
+
+.nav-icon{
+    display:block;
+    font-size:19px;
+    margin-bottom:4px;
+}
+
+.cart-count{
+    position:absolute;
+    margin-left:-5px;
+    margin-top:-4px;
+    background:#d8b778;
+    color:#111;
+    font-size:8px;
+    border-radius:20px;
+    padding:3px 5px;
+}
+
+.modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    z-index:50;
+    background:rgba(0,0,0,.75);
+    align-items:flex-end;
+}
+
+.modal.show{display:flex}
+
+.sheet{
+    background:#111;
+    width:100%;
+    max-width:600px;
+    margin:auto;
+    border-radius:16px 16px 0 0;
+    max-height:90vh;
+    overflow:auto;
+    padding-bottom:25px;
+}
+
+.sheet-img{
+    width:100%;
+    aspect-ratio:1/1;
+    object-fit:cover;
+}
+
+.sheet-content{
+    padding:20px;
+}
+
+.close{
+    position:absolute;
+    right:18px;
+    top:15px;
+    width:36px;
+    height:36px;
+    border:0;
+    border-radius:50%;
+    background:#111;
+    color:white;
+}
+
+.sheet-brand{
+    color:#a89168;
+    font-size:10px;
+    letter-spacing:2px;
+}
+
+.sheet h2{
+    font-family:"Playfair Display",serif;
+    font-size:27px;
+    font-weight:500;
+    margin:8px 0;
+}
+
+.sheet-price{
+    color:#e0c084;
+    font-size:18px;
+    font-weight:600;
+}
+
+.sizes{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin:12px 0 20px;
+}
+
+.size{
+    width:46px;
+    height:40px;
+    border:1px solid #383838;
+    background:#151515;
+    color:#fff;
+    border-radius:3px;
+}
+
+.size.selected{
+    background:#d8b778;
+    color:#111;
+    border-color:#d8b778;
+}
+
+.full-btn{
+    width:100%;
+    padding:15px;
+    border:0;
+    background:#d8b778;
+    color:#111;
+    font-weight:600;
+    border-radius:3px;
+}
+
+.empty{
+    text-align:center;
+    padding:70px 20px;
+    color:#777;
+}
+
+.cart-row{
+    display:flex;
+    gap:12px;
+    padding:15px 0;
+    border-bottom:1px solid #222;
+}
+
+.cart-row img{
+    width:75px;
+    height:75px;
+    object-fit:cover;
+}
+
+.cart-info{flex:1}
+
+.cart-name{font-size:12px}
+
+.cart-size{
+    font-size:10px;
+    color:#888;
+    margin:5px 0;
+}
+
+.cart-price{
+    color:#d9ba7e;
+    font-size:12px;
+}
+
+.checkout{
+    margin:20px 18px;
+    padding:18px;
+    background:#141414;
+    border:1px solid #292929;
+}
+
+.total{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:15px;
+}
+
+.profile{
+    padding:30px 18px;
+}
+
+.profile-card{
+    background:#141414;
+    border:1px solid #292929;
+    padding:25px;
+    text-align:center;
+}
+
+.avatar{
+    width:65px;
+    height:65px;
+    border-radius:50%;
+    background:#d8b778;
+    color:#111;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin:auto;
+    font-family:"Playfair Display",serif;
+    font-size:25px;
+}
+
+.menu-item{
+    width:100%;
+    padding:17px 0;
+    border:0;
+    border-bottom:1px solid #252525;
+    background:none;
+    color:#eee;
+    text-align:left;
+}
+
+@media(min-width:500px){
+    .products{grid-template-columns:repeat(3,1fr)}
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<header class="header">
+    <div>
+        <div class="logo">LUXURY</div>
+        <div class="subtitle">THE ART OF WALKING</div>
+    </div>
+    <button class="icon-btn" onclick="toggleSearch()">⌕</button>
+</header>
+
+<!-- HOME -->
+<div id="home" class="page active">
+
+<section class="hero">
+    <div class="hero-content">
+        <div class="hero-small">NEW SEASON</div>
+        <h1>THE ART<br>OF WALKING</h1>
+        <p>Обувь, которая говорит о вашем стиле.</p>
+        <button class="gold-btn" onclick="showPage('catalog')">
+            СМОТРЕТЬ КОЛЛЕКЦИЮ →
+        </button>
+    </div>
+</section>
+
+<div id="homeSearch" class="search">
+    <input placeholder="Поиск обуви..." oninput="searchProducts(this.value)">
+</div>
+
+<section class="section">
+    <div class="section-title">
+        <h2>Категории</h2>
+        <span onclick="showPage('catalog')">Все →</span>
+    </div>
+
+    <div class="categories">
+        <button class="cat" onclick="filterCategory('Кроссовки')">
+            <strong>Кроссовки</strong><span>Street / Sport</span>
+        </button>
+        <button class="cat" onclick="filterCategory('Мужская')">
+            <strong>Мужская</strong><span>Collection</span>
+        </button>
+        <button class="cat" onclick="filterCategory('Женская')">
+            <strong>Женская</strong><span>Collection</span>
+        </button>
+        <button class="cat" onclick="filterCategory('Ботинки')">
+            <strong>Ботинки</strong><span>Premium</span>
+        </button>
+    </div>
+</section>
+
+<section class="section">
+    <div class="section-title">
+        <h2>Новинки</h2>
+        <span onclick="showPage('catalog')">Все →</span>
+    </div>
+    <div class="products" id="homeProducts"></div>
+</section>
+
+</div>
+
+<!-- CATALOG -->
+<div id="catalog" class="page">
+
+<div class="catalog-header">
+    <h1>Каталог</h1>
+    <input id="catalogSearch" class="catalog-search"
+           placeholder="Поиск модели или бренда..."
+           oninput="searchProducts(this.value)">
+</div>
+
+<div class="filters">
+    <button class="filter active" onclick="filterCategory('Все')">Все</button>
+    <button class="filter" onclick="filterCategory('Кроссовки')">Кроссовки</button>
+    <button class="filter" onclick="filterCategory('Ботинки')">Ботинки</button>
+    <button class="filter" onclick="filterCategory('Классика')">Классика</button>
+    <button class="filter" onclick="filterCategory('Мужская')">Мужская</button>
+    <button class="filter" onclick="filterCategory('Женская')">Женская</button>
+</div>
+
+<section class="section">
+    <div class="products" id="catalogProducts"></div>
+</section>
+
+</div>
+
+<!-- CART -->
+<div id="cart" class="page">
+
+<div class="catalog-header">
+    <h1>Корзина</h1>
+</div>
+
+<div class="section" id="cartContent"></div>
+
+</div>
+
+<!-- PROFILE -->
+<div id="profile" class="page">
+
+<div class="profile">
+    <h1 style="font-family:'Playfair Display';font-weight:500">Профиль</h1>
+
+    <div class="profile-card">
+        <div class="avatar" id="avatar">L</div>
+        <h3 id="userName">LUXURY CLIENT</h3>
+        <p style="color:#777;font-size:11px">Добро пожаловать</p>
+    </div>
+
+    <div style="margin-top:25px">
+        <button class="menu-item">♡ Избранное</button>
+        <button class="menu-item">▣ Мои заказы</button>
+        <button class="menu-item">⌖ Адреса доставки</button>
+        <button class="menu-item">♧ Поддержка</button>
+        <button class="menu-item">⚙ Настройки</button>
+    </div>
+</div>
+
+</div>
+
+</div>
+
+<!-- PRODUCT MODAL -->
+
+<div id="productModal" class="modal" onclick="closeOutside(event)">
+    <div class="sheet">
+
+        <button class="close" onclick="closeProduct()">×</button>
+
+        <img id="modalImage" class="sheet-img">
+
+        <div class="sheet-content">
+
+            <div id="modalBrand" class="sheet-brand"></div>
+
+            <h2 id="modalName"></h2>
+
+            <div id="modalPrice" class="sheet-price"></div>
+
+            <p style="color:#888;font-size:11px">
+                Выберите размер
+            </p>
+
+            <div class="sizes" id="sizes"></div>
+
+            <button class="full-btn" onclick="addSelectedToCart()">
+                ДОБАВИТЬ В КОРЗИНУ
+            </button>
+
+        </div>
+    </div>
+</div>
+
+<!-- NAVIGATION -->
+
+<nav class="bottom">
+
+<button class="nav active" onclick="showPage('home',this)">
+    <span class="nav-icon">⌂</span>
+    Главная
+</button>
+
+<button class="nav" onclick="showPage('catalog',this)">
+    <span class="nav-icon">⌘</span>
+    Каталог
+</button>
+
+<button class="nav" onclick="showPage('cart',this)">
+    <span class="nav-icon">♧</span>
+    Корзина
+    <span id="cartCount" class="cart-count">0</span>
+</button>
+
+<button class="nav" onclick="showPage('profile',this)">
+    <span class="nav-icon">♙</span>
+    Профиль
+</button>
+
+</nav>
+
+<script>
+
+const tg = window.Telegram?.WebApp;
+
+if(tg){
+    tg.ready();
+    tg.expand();
+}
+
+const products = [
+
+{
+ id:1,
+ brand:"Nike",
+ name:"Air Force 1 '07",
+ category:"Кроссовки",
+ gender:"Мужская",
+ price:1290000,
+ oldPrice:1490000,
+ image:"https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=900&q=85",
+ sizes:["39","40","41","42","43","44"]
+},
+
+{
+ id:2,
+ brand:"Adidas",
+ name:"Samba OG",
+ category:"Кроссовки",
+ gender:"Мужская",
+ price:1190000,
+ image:"https://images.unsplash.com/photo-1552346154-21d32810aba3?auto=format&fit=crop&w=900&q=85",
+ sizes:["40","41","42","43","44"]
+},
+
+{
+ id:3,
+ brand:"New Balance",
+ name:"530",
+ category:"Кроссовки",
+ gender:"Мужская",
+ price:1390000,
+ image:"https://images.unsplash.com/photo-1554130842-5f5a9a6a8f7f?auto=format&fit=crop&w=900&q=85",
+ sizes:["39","40","41","42","43"]
+},
+
+{
+ id:4,
+ brand:"Puma",
+ name:"Suede Classic",
+ category:"Кроссовки",
+ gender:"Женская",
+ price:1090000,
+ image:"https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?auto=format&fit=crop&w=900&q=85",
+ sizes:["36","37","38","39","40"]
+},
+
+{
+ id:5,
+ brand:"Timberland",
+ name:"Premium Boot",
+ category:"Ботинки",
+ gender:"Мужская",
+ price:1890000,
+ image:"https://images.unsplash.com/photo-1520639888713-7851133b1ed0?auto=format&fit=crop&w=900&q=85",
+ sizes:["40","41","42","43","44"]
+},
+
+{
+ id:6,
+ brand:"Clarks",
+ name:"Wallabee",
+ category:"Классика",
+ gender:"Мужская",
+ price:1690000,
+ image:"https://images.unsplash.com/photo-1614252369475-531eba835eb1?auto=format&fit=crop&w=900&q=85",
+ sizes:["40","41","42","43"]
+}
+
+];
+
+let cart=[];
+let currentProduct=null;
+let selectedSize=null;
+let currentFilter="Все";
+
+function money(n){
+    return new Intl.NumberFormat("ru-RU").format(n)+" сум";
+}
+
+function productCard(p){
+
+return `
+<div class="product" onclick="openProduct(${p.id})">
+
+<button class="heart" onclick="event.stopPropagation();favorite(${p.id})">♡</button>
+
+<img class="product-img" src="${p.image}">
+
+<div class="product-info">
+
+<div class="product-brand">${p.brand}</div>
+
+<div class="product-name">${p.name}</div>
+
+<div>
+<span class="price">${money(p.price)}</span>
+${p.oldPrice?`<span class="old-price">${money(p.oldPrice)}</span>`:""}
+</div>
+
+</div>
+</div>
+`;
+}
+
+function renderProducts(list=products){
+
+document.getElementById("homeProducts").innerHTML=
+list.slice(0,4).map(productCard).join("");
+
+document.getElementById("catalogProducts").innerHTML=
+list.map(productCard).join("");
+
+}
+
+function openProduct(id){
+
+currentProduct=products.find(p=>p.id===id);
+selectedSize=null;
+
+document.getElementById("modalImage").src=currentProduct.image;
+document.getElementById("modalBrand").textContent=currentProduct.brand;
+document.getElementById("modalName").textContent=currentProduct.name;
+document.getElementById("modalPrice").textContent=money(currentProduct.price);
+
+document.getElementById("sizes").innerHTML=
+currentProduct.sizes.map(s=>
+`<button class="size" onclick="selectSize(this,'${s}')">${s}</button>`
+).join("");
+
+document.getElementById("productModal").classList.add("show");
+
+}
+
+function selectSize(el,size){
+
+document.querySelectorAll(".size").forEach(x=>x.classList.remove("selected"));
+el.classList.add("selected");
+selectedSize=size;
+
+}
+
+function addSelectedToCart(){
+
+if(!selectedSize){
+
+if(tg) tg.showAlert("Пожалуйста, выберите размер");
+else alert("Пожалуйста, выберите размер");
+
+return;
+}
+
+cart.push({
+product:currentProduct,
+size:selectedSize
+});
+
+updateCart();
+closeProduct();
+
+if(tg) tg.HapticFeedback?.notificationOccurred("success");
+
+}
+
+function updateCart(){
+
+document.getElementById("cartCount").textContent=cart.length;
+
+renderCart();
+
+}
+
+function renderCart(){
+
+const box=document.getElementById("cartContent");
+
+if(!cart.length){
+
+box.innerHTML=`
+<div class="empty">
+<div style="font-size:45px">♧</div>
+<h3>Корзина пуста</h3>
+<p>Добавьте обувь из каталога</p>
+</div>`;
+
+return;
+}
+
+let total=0;
+
+let rows=cart.map((item,index)=>{
+
+total+=item.product.price;
+
+return `
+<div class="cart-row">
+
+<img src="${item.product.image}">
+
+<div class="cart-info">
+
+<div class="cart-name">
+${item.product.brand} ${item.product.name}
+</div>
+
+<div class="cart-size">
+Размер: ${item.size}
+</div>
+
+<div class="cart-price">
+${money(item.product.price)}
+</div>
+
+<button onclick="removeCart(${index})"
+style="margin-top:7px;background:none;border:0;color:#777;font-size:10px">
+Удалить
+</button>
+
+</div>
+</div>
+`;
+}).join("");
+
+box.innerHTML=`
+${rows}
+
+<div class="checkout">
+
+<div class="total">
+<span>Итого</span>
+<strong>${money(total)}</strong>
+</div>
+
+<button class="full-btn" onclick="checkout()">
+ОФОРМИТЬ ЗАКАЗ
+</button>
+
+</div>
+`;
+
+}
+
+function removeCart(index){
+
+cart.splice(index,1);
+updateCart();
+
+}
+
+function checkout(){
+
+if(!cart.length)return;
+
+if(tg){
+
+tg.sendData(JSON.stringify({
+type:"new_order",
+items:cart.map(x=>({
+id:x.product.id,
+name:x.product.name,
+brand:x.product.brand,
+size:x.size,
+price:x.product.price
+}))
+}));
+
+tg.showAlert("Заявка отправлена");
+
+}else{
+
+alert("Тестовый режим: заказ будет подключён после настройки Telegram.");
+
+}
+
+}
+
+function showPage(id,button){
+
+document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+
+document.getElementById(id).classList.add("active");
+
+document.querySelectorAll(".nav").forEach(n=>n.classList.remove("active"));
+
+if(button)button.classList.add("active");
+
+window.scrollTo(0,0);
+
+}
+
+function filterCategory(category){
+
+currentFilter=category;
+
+let result=products;
+
+if(category!=="Все"){
+
+result=products.filter(p=>
+p.category===category ||
+p.gender===category
+);
+
+}
+
+showPage("catalog");
+
+renderProducts(result);
+
+}
+
+function searchProducts(value){
+
+value=value.toLowerCase();
+
+let result=products.filter(p=>
+(p.name+" "+p.brand+" "+p.category)
+.toLowerCase()
+.includes(value)
+);
+
+renderProducts(result);
+
+}
+
+function toggleSearch(){
+
+const el=document.getElementById("homeSearch");
+
+el.style.display=
+el.style.display==="block"?"none":"block";
+
+}
+
+function closeProduct(){
+
+document.getElementById("productModal").classList.remove("show");
+
+}
+
+function closeOutside(e){
+
+if(e.target.id==="productModal")closeProduct();
+
+}
+
+function favorite(id){
+
+if(tg)tg.HapticFeedback?.impactOccurred("light");
+
+}
+
+const user=tg?.initDataUnsafe?.user;
+
+if(user){
+
+document.getElementById("userName").textContent=
+(user.first_name||"LUXURY CLIENT")+" "+(user.last_name||"");
+
+document.getElementById("avatar").textContent=
+(user.first_name||"L").charAt(0).toUpperCase();
+
+}
+
+renderProducts();
+renderCart();
+
+</script>
+
+</body>
+</html>
